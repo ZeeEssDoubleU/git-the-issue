@@ -1,8 +1,12 @@
 import React from "react";
+
+// import styles
 import "./App.css";
+// import components
+import Profile from "../Profile/Profile";
 
 const App = () => {
-	return <div>My App yo!</div>;
+	return <Profile />;
 };
 
 export default App;
