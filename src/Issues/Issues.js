@@ -35,8 +35,9 @@ const Issues = ({ repositoryName, repositoryOwner }) => {
 				<Query
 					query={GET_ISSUES_OF_REPOSITORY}
 					// issueState added to variables for server side filtering
-					variables={{ repositoryName, repositoryOwner, issueState }}>
-					{({ data, loading, error }) => {
+					variables={{ repositoryName, repositoryOwner, issueState }}
+					notifyOnNetworkStatusChange={true}>
+					{({ data, loading, error, fetchMore }) => {
 						if (error) return <Error error={error} />;
 
 						const { repository } = data;
@@ -46,7 +47,16 @@ const Issues = ({ repositoryName, repositoryOwner }) => {
 						if (!repository.issues.edges.length)
 							return <div className="IssueList">No Issues...</div>;
 						// return filtered (now server side filtered) issues
-						return <IssueList issues={repository.issues} />;
+						return (
+							<IssueList
+								issues={repository.issues}
+								loading={loading}
+								repositoryOwner={repositoryOwner}
+								repositoryName={repositoryName}
+								issueState={issueState}
+								fetchMore={fetchMore}
+							/>
+						);
 					}}
 				</Query>
 			)}

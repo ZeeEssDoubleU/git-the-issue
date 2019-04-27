@@ -1,5 +1,5 @@
 .IssueItem {
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	display: flex;
 	align-items: baseline;
 }
@@ -8,4 +8,5 @@
 	margin-left: 10px;
 	padding-left: 10px;
 	border-left: 1px solid #000;
+	border-bottom: 1px solid #000;
 }
