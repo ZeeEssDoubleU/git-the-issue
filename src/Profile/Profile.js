@@ -4,7 +4,7 @@ import { Query } from "react-apollo";
 // import components
 import Loading from "../Loading/Loading";
 import RepositoryList from "../Repository/RepositoryList";
-import ErrorMessage from "../Error/Error";
+import Error from "../Error/Error";
 // import queries / mutations
 import { GET_REPOSITORIES_OF_CURRENT_USER } from "../gql-types";
 
@@ -13,7 +13,7 @@ const Profile = () => (
 		query={GET_REPOSITORIES_OF_CURRENT_USER}
 		notifyOnNetworkStatusChange={true}>
 		{({ data, loading, error, fetchMore }) => {
-			if (error) return <ErrorMessage error={error} />;
+			if (error) return <Error error={error} />;
 
 			const { viewer } = data;
 			if (loading && !viewer) return <Loading />;
@@ -23,6 +23,7 @@ const Profile = () => (
 					loading={loading}
 					repositories={viewer.repositories}
 					fetchMore={fetchMore}
+					entry='viewer'
 				/>
 			);
 		}}
