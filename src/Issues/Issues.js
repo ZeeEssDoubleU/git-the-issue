@@ -39,11 +39,21 @@ const Issues = ({ repositoryName, repositoryOwner }) => {
 						if (error) return <Error error={error} />;
 
 						const { repository } = data;
+						// return loading indicator
 						if (loading && !repository) return <Loading />;
-						if (!repository.issues.edges.length)
+						// filter repo issues based on issueState
+						const filteredRepository = {
+							issues: {
+								edges: repository.issues.edges.filter(
+									issue => issue.node.state === issueState,
+								),
+							},
+						};
+						// return 'no issues' if no edges returned from query
+						if (!filteredRepository.issues.edges.length)
 							return <div className="IssueList">No Issues...</div>;
-
-						return <IssueList issues={repository.issues} />;
+						// return filtered issues
+						return <IssueList issues={filteredRepository.issues} />;
 					}}
 				</Query>
 			)}
