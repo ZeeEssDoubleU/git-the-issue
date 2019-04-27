@@ -5,11 +5,11 @@ import { Query } from "react-apollo";
 import Error from "../Error/Error";
 import Loading from "../Loading/Loading";
 import IssueList from "./IssueList";
-import ButtonUnobtrusive from "../Button/Button";
+import IssueFilter from "./IssueFilter";
 // import queries / mutations / etc
 import { GET_ISSUES_OF_REPOSITORY } from "../gql-types";
 // import constants
-import { ISSUE_STATES, ISSUE_STATE_LABEL } from "../constants";
+import { ISSUE_STATES } from "../constants";
 
 const Issues = ({ repositoryName, repositoryOwner }) => {
 	const issueStates = [
@@ -27,9 +27,15 @@ const Issues = ({ repositoryName, repositoryOwner }) => {
 
 	return (
 		<div className="Issues">
-			<ButtonUnobtrusive onClick={() => changeIssueState()}>
-				{ISSUE_STATE_LABEL[issueState]}
-			</ButtonUnobtrusive>
+			<IssueFilter
+				repositoryOwner={repositoryOwner}
+				repositoryName={repositoryName}
+            changeIssueState={changeIssueState}
+            issueStates={issueStates}
+            issueIndex={issueIndex}
+            issueState={issueState}
+            showIssues={showIssues}
+			/>
 
 			{showIssues(issueState) && (
 				<Query
