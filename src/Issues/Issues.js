@@ -30,11 +30,11 @@ const Issues = ({ repositoryName, repositoryOwner }) => {
 			<IssueFilter
 				repositoryOwner={repositoryOwner}
 				repositoryName={repositoryName}
-            changeIssueState={changeIssueState}
-            issueStates={issueStates}
-            issueIndex={issueIndex}
-            issueState={issueState}
-            showIssues={showIssues}
+				changeIssueState={changeIssueState}
+				issueStates={issueStates}
+				issueIndex={issueIndex}
+				issueState={issueState}
+				showIssues={showIssues}
 			/>
 
 			{showIssues(issueState) && (
@@ -42,7 +42,8 @@ const Issues = ({ repositoryName, repositoryOwner }) => {
 					query={GET_ISSUES_OF_REPOSITORY}
 					// issueState added to variables for server side filtering
 					variables={{ repositoryName, repositoryOwner, issueState }}
-					notifyOnNetworkStatusChange={true}>
+					notifyOnNetworkStatusChange={true}
+				>
 					{({ data, loading, error, fetchMore }) => {
 						if (error) return <Error error={error} />;
 

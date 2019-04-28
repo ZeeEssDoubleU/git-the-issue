@@ -38,7 +38,12 @@ const IssueList = ({
 	return (
 		<div className="IssueList">
 			{issues.edges.map(({ node }) => (
-				<IssueItem key={node.id} issue={node} />
+				<IssueItem
+					key={node.id}
+					issue={node}
+					repositoryName={repositoryName}
+					repositoryOwner={repositoryOwner}
+				/>
 			))}
 
 			<FetchMore
@@ -51,7 +56,8 @@ const IssueList = ({
 					issueState,
 				}}
 				updateQuery={updateQuery}
-				fetchMore={fetchMore}>
+				fetchMore={fetchMore}
+			>
 				Issues
 			</FetchMore>
 		</div>

@@ -18,12 +18,14 @@ const FetchMore = ({
 		{loading ? (
 			<Loading />
 		) : (
+			// TODO: Add prefetching to 'more repositories' and 'more comments' buttons
 			hasNextPage && (
 				<ButtonUnobtrusive
 					type="button"
 					className="FetchMore-button"
-					onClick={() => fetchMore({ variables, updateQuery })}>
-					More {children}
+					onClick={() => fetchMore({ variables, updateQuery })}
+				>
+					{children}
 				</ButtonUnobtrusive>
 			)
 		)}

@@ -1,20 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
+import { ApolloConsumer } from "react-apollo";
 
 // import styles
 import "./IssueItem.css";
 // import components
 import Link from "../Link/Link";
+import Comments from "../Comments/Comments";
+import Button from "../Button/Button";
+// import queries / mutations / etc
+import { GET_COMMENTS_OF_ISSUE } from "../gql-types";
 
-const IssueItem = ({ issue }) => {
+const IssueItem = ({ issue, repositoryOwner, repositoryName }) => {
+	const [showComments, setShowComments] = useState(false);
+
+	const prefetchIssues = client => {
+		if (!showComments) {
+			client.query({
+				query: GET_COMMENTS_OF_ISSUE,
+				variables: {
+					repositoryName,
+					repositoryOwner,
+					number: issue.number,
+				},
+			});
+		}
+	};
+
 	return (
 		<div className="IssueItem">
-			{/* TODO: show/hide comment button */}
+			<ApolloConsumer>
+				{client => (
+					<Button
+						className="showComments-button"
+						onClick={() => setShowComments(!showComments)}
+						onMouseOver={() => prefetchIssues(client)}
+					>
+						{showComments ? "-" : "+"}
+					</Button>
+				)}
+			</ApolloConsumer>
+
 			<div className="IssueItem-content">
 				<h3>
 					<Link href={issue.url}>{issue.title}</Link>
 				</h3>
+				<span>{`(${issue.state})`}</span>
 				<div dangerouslySetInnerHTML={{ __html: issue.bodyHTML }} />
-				{/* TODO: render a list of comments */}
+				{showComments && (
+					<Comments
+						issue={issue}
+						repositoryName={repositoryName}
+						repositoryOwner={repositoryOwner}
+					/>
+				)}
 			</div>
 		</div>
 	);

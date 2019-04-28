@@ -5,8 +5,13 @@
 }
 
 .IssueItem-content {
+	width: 100%;
 	margin-left: 10px;
 	padding-left: 10px;
 	border-left: 1px solid #000;
 	border-bottom: 1px solid #000;
+}
+
+.IssueItem .showComments-button {
+	width: 30px;
 }

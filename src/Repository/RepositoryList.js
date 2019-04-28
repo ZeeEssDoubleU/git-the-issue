@@ -49,8 +49,9 @@ const RepositoryList = ({ repositories, fetchMore, loading, entry }) => {
 					cursor: repositories.pageInfo.endCursor,
 				}}
 				updateQuery={updateQuery(entry)}
-				fetchMore={fetchMore}>
-				Repositories
+				fetchMore={fetchMore}
+			>
+				More Repositories
 			</FetchMore>
 		</>
 	);
