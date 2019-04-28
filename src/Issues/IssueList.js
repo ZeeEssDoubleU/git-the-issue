@@ -58,7 +58,7 @@ const IssueList = ({
 				updateQuery={updateQuery}
 				fetchMore={fetchMore}
 			>
-				Issues
+				More Issues
 			</FetchMore>
 		</div>
 	);

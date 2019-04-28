@@ -19,7 +19,7 @@ const IssueFilter = ({
 		issueStates[issueIndex === issueStates.length - 1 ? 0 : issueIndex + 1];
 
 	const prefetchIssues = client => {
-		// prefetch the below button's NEXT issueState
+		// prefetch the issueFilter-button's NEXT issueState
 		if (showIssues(nextIssueState)) {
 			client.query({
 				query: GET_ISSUES_OF_REPOSITORY,

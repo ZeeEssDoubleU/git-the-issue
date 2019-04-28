@@ -14,6 +14,7 @@ const IssueItem = ({ issue, repositoryOwner, repositoryName }) => {
 	const [showComments, setShowComments] = useState(false);
 
 	const prefetchIssues = client => {
+		// prefetch the showComments-button's opposite state
 		if (!showComments) {
 			client.query({
 				query: GET_COMMENTS_OF_ISSUE,
@@ -28,6 +29,7 @@ const IssueItem = ({ issue, repositoryOwner, repositoryName }) => {
 
 	return (
 		<div className="IssueItem">
+			{/* use ApolloConsumer to implicitly call client for prefetching */}
 			<ApolloConsumer>
 				{client => (
 					<Button

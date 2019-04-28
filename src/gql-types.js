@@ -150,3 +150,15 @@ export const WATCH_REPO = gql`
 		}
 	}
 `;
+
+export const ADD_COMMENT = gql`
+	mutation($issueId: ID!, $commentText: String!) {
+		addComment(input: { subjectId: $issueId, body: $commentText }) {
+			commentEdge {
+				node {
+					body
+				}
+			}
+		}
+	}
+`;

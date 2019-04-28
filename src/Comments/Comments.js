@@ -7,6 +7,7 @@ import "./Comments.css";
 import CommentList from "./CommentList";
 import Error from "../Error/Error";
 import Loading from "../Loading/Loading";
+import AddComment from "./AddComment";
 // import queries / mutations / etc
 import { GET_COMMENTS_OF_ISSUE } from "../gql-types";
 
@@ -46,15 +47,18 @@ const Comments = ({ repositoryName, repositoryOwner, issue }) => {
 						);
 
 					return (
-						<CommentList
-							comments={repository.issue.comments}
-							loading={loading}
-							fetchMore={fetchMore}
-							number={issue.number}
-							repository={repository}
-							repositoryName={repositoryName}
-							repositoryOwner={repositoryOwner}
-						/>
+						<>
+							<CommentList
+								comments={repository.issue.comments}
+								loading={loading}
+								fetchMore={fetchMore}
+								number={issue.number}
+								repository={repository}
+								repositoryName={repositoryName}
+								repositoryOwner={repositoryOwner}
+							/>
+							{/* <AddComment issueId={repository.issue.id} /> */}
+						</>
 					);
 				}}
 			</Query>

@@ -4,7 +4,7 @@ import React from "react";
 import "./FetchMore.css";
 // import components
 import Loading from "../Loading/Loading";
-import { ButtonUnobtrusive } from "../Button/Button";
+import Button from "../Button/Button";
 
 const FetchMore = ({
 	loading,
@@ -20,13 +20,13 @@ const FetchMore = ({
 		) : (
 			// TODO: Add prefetching to 'more repositories' and 'more comments' buttons
 			hasNextPage && (
-				<ButtonUnobtrusive
+				<Button
 					type="button"
 					className="FetchMore-button"
 					onClick={() => fetchMore({ variables, updateQuery })}
 				>
 					{children}
-				</ButtonUnobtrusive>
+				</Button>
 			)
 		)}
 	</div>

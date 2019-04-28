@@ -14,3 +14,18 @@
 	margin-left: 10px;
 	padding: 10px 0 0 10px;
 }
+.AddComment textarea {
+	box-sizing: border-box;
+	width: calc(100% - 10px);
+	padding: 10px;
+	font-size: 16px;
+	margin-left: 10px;
+	border: black 1px solid;
+}
+.AddComment button {
+	box-sizing: border-box;
+	width: calc(100% - 10px);
+	padding: 10px;
+	font-size: 16px;
+	margin-left: 10px;
+}

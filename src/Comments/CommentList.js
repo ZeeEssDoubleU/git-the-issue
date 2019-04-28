@@ -5,11 +5,13 @@ import "./Comments.css";
 // import components
 import CommentItem from "./CommentItem";
 import FetchMore from "../FetchMore/FetchMore";
+import AddComment from "./AddComment";
 
 const CommentList = ({
 	comments,
 	loading,
 	fetchMore,
+	repository,
 	repositoryName,
 	repositoryOwner,
 	number,
@@ -63,6 +65,8 @@ const CommentList = ({
 			>
 				More Comments
 			</FetchMore>
+
+			<AddComment issueId={repository.issue.id} />
 		</div>
 	);
 };

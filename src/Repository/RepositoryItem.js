@@ -80,11 +80,13 @@ const RepositoryItem = ({
 										},
 									},
 								},
-							}}>
-							{addStar => (
+							}}
+						>
+							{(addStar, { data, loading, error }) => (
 								<Button
 									className="RepositoryItem-title-action"
-									onClick={addStar}>
+									onClick={addStar}
+								>
 									{stargazers.totalCount}
 									{" Stars (Star)"}
 								</Button>
@@ -107,11 +109,13 @@ const RepositoryItem = ({
 										},
 									},
 								},
-							}}>
-							{removeStar => (
+							}}
+						>
+							{(removeStar, { data, loading, error }) => (
 								<Button
 									className="RepositoryItem-title-action"
-									onClick={removeStar}>
+									onClick={removeStar}
+								>
 									{stargazers.totalCount}
 									{" Stars (Unstar)"}
 								</Button>
@@ -140,11 +144,13 @@ const RepositoryItem = ({
 								},
 							},
 						}}
-						update={updateWatchers}>
-						{updateSubscription => (
+						update={updateWatchers}
+					>
+						{(updateSubscription, { data, loading, error }) => (
 							<Button
 								className="RepositoryItem-title-action"
-								onClick={updateSubscription}>
+								onClick={updateSubscription}
+							>
 								{watchers.totalCount}
 								{" Watchers "}
 								{viewerSubscription === "SUBSCRIBED"
