@@ -8,7 +8,6 @@ import FetchMore from "../FetchMore/FetchMore";
 import AddComment from "./AddComment";
 
 const CommentList = ({
-	comments,
 	loading,
 	fetchMore,
 	repository,
@@ -44,28 +43,37 @@ const CommentList = ({
 		};
 	};
 
+	// destructure for use below
+	const { comments } = repository.issue;
+
 	return (
 		<div className="CommentList">
-			<header className="CommentList-header">Comments</header>
-			{comments.edges.map(({ node }) => (
-				<CommentItem key={node.id} comment={node} />
-			))}
-
-			<FetchMore
-				loading={loading}
-				hasNextPage={comments.pageInfo.hasNextPage}
-				variables={{
-					repositoryName,
-					repositoryOwner,
-					number,
-					cursor: comments.pageInfo.endCursor,
-				}}
-				updateQuery={updateQuery}
-				fetchMore={fetchMore}
-			>
-				More Comments
-			</FetchMore>
-
+			{/* check if comments exist */}
+			{!comments.edges.length ? (
+				// return 'no comments' if no edges returned from query
+				<header className="CommentList-header">No Comments...</header>
+			) : (
+				<>
+					<header className="CommentList-header">Comments</header>
+					{comments.edges.map(({ node }) => (
+						<CommentItem key={node.id} comment={node} />
+					))}
+					<FetchMore
+						loading={loading}
+						hasNextPage={comments.pageInfo.hasNextPage}
+						variables={{
+							repositoryName,
+							repositoryOwner,
+							number,
+							cursor: comments.pageInfo.endCursor,
+						}}
+						updateQuery={updateQuery}
+						fetchMore={fetchMore}
+					>
+						More Comments
+					</FetchMore>
+				</>
+			)}
 			<AddComment issueId={repository.issue.id} />
 		</div>
 	);

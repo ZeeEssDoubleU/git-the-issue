@@ -1,14 +1,12 @@
 import React from "react";
-import { Mutation } from "react-apollo";
 
 // import styles
 import "./Repository.css";
 //import components
 import Link from "../Link/Link";
-import Button from "../Button/Button";
-// import queries / mutations / fragments
-import { STAR_REPO, UNSTAR_REPO, WATCH_REPO } from "../gql-types";
-import { REPO_FRAG } from "../gql-fragments";
+import StarRepo from "./StarRepo";
+import UnstarRepo from "./UnstarRepo";
+import WatchRepo from "./WatchRepo";
 
 const RepositoryItem = ({
 	id,
@@ -22,39 +20,6 @@ const RepositoryItem = ({
 	viewerSubscription,
 	viewerHasStarred,
 }) => {
-	const updateWatchers = (
-		client,
-		{
-			data: {
-				updateSubscription: {
-					subscribable: { id, viewerSubscription },
-				},
-			},
-		},
-	) => {
-		const repository = client.readFragment({
-			id: `Repository:${id}`,
-			fragment: REPO_FRAG,
-		});
-
-		const totalCount =
-			viewerSubscription === "SUBSCRIBED"
-				? repository.watchers.totalCount + 1
-				: repository.watchers.totalCount - 1;
-
-		client.writeFragment({
-			id: `Repository:${id}`,
-			fragment: REPO_FRAG,
-			data: {
-				...repository,
-				watchers: {
-					...repository.watchers,
-					totalCount,
-				},
-			},
-		});
-	};
-
 	return (
 		<div>
 			<div className="RepositoryItem-title">
@@ -64,101 +29,23 @@ const RepositoryItem = ({
 
 				<div className="RepositoryItem-title-action">
 					{!viewerHasStarred ? (
-						<Mutation
-							mutation={STAR_REPO}
-							variables={{ id }}
-							optimisticResponse={{
-								addStar: {
-									__typename: "Mutation",
-									starrable: {
-										__typename: "Repository",
-										id,
-										viewerHasStarred: !viewerHasStarred,
-										stargazers: {
-											__typename: "StargazerConnection",
-											totalCount: stargazers.totalCount + 1,
-										},
-									},
-								},
-							}}
-						>
-							{(addStar, { data, loading, error }) => (
-								<Button
-									className="RepositoryItem-title-action"
-									onClick={addStar}
-								>
-									{stargazers.totalCount}
-									{" Stars (Star)"}
-								</Button>
-							)}
-						</Mutation>
+						<StarRepo
+							id={id}
+							stargazers={stargazers}
+							viewerHasStarred={viewerHasStarred}
+						/>
 					) : (
-						<Mutation
-							mutation={UNSTAR_REPO}
-							variables={{ id }}
-							optimisticResponse={{
-								removeStar: {
-									__typename: "Mutation",
-									starrable: {
-										__typename: "Repository",
-										id,
-										viewerHasStarred: !viewerHasStarred,
-										stargazers: {
-											__typename: "StargazerConnection",
-											totalCount: stargazers.totalCount - 1,
-										},
-									},
-								},
-							}}
-						>
-							{(removeStar, { data, loading, error }) => (
-								<Button
-									className="RepositoryItem-title-action"
-									onClick={removeStar}
-								>
-									{stargazers.totalCount}
-									{" Stars (Unstar)"}
-								</Button>
-							)}
-						</Mutation>
+						<UnstarRepo
+							id={id}
+							stargazers={stargazers}
+							viewerHasStarred={viewerHasStarred}
+						/>
 					)}
-					<Mutation
-						mutation={WATCH_REPO}
-						variables={{
-							id,
-							newWatchState:
-								viewerSubscription === "SUBSCRIBED"
-									? "UNSUBSCRIBED"
-									: "SUBSCRIBED",
-						}}
-						optimisticResponse={{
-							updateSubscription: {
-								__typename: "Mutation",
-								subscribable: {
-									__typename: "Repository",
-									id,
-									viewerSubscription:
-										viewerSubscription === "SUBSCRIBED"
-											? "UNSUBSCRIBED"
-											: "SUBSCRIBED",
-								},
-							},
-						}}
-						update={updateWatchers}
-					>
-						{(updateSubscription, { data, loading, error }) => (
-							<Button
-								className="RepositoryItem-title-action"
-								onClick={updateSubscription}
-							>
-								{watchers.totalCount}
-								{" Watchers "}
-								{viewerSubscription === "SUBSCRIBED"
-									? "(Unwatch)"
-									: "(Watch)"}
-							</Button>
-						)}
-					</Mutation>
+					<WatchRepo
+						id={id}
+						watchers={watchers}
+						viewerSubscription={viewerSubscription}
+					/>
 				</div>
 			</div>
 
