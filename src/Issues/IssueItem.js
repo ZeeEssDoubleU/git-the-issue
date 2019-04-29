@@ -50,7 +50,7 @@ const IssueItem = ({ issue, repositoryOwner, repositoryName }) => {
 				<div dangerouslySetInnerHTML={{ __html: issue.bodyHTML }} />
 				{showComments && (
 					<Comments
-						issue={issue}
+						issueNumber={issue.number}
 						repositoryName={repositoryName}
 						repositoryOwner={repositoryOwner}
 					/>

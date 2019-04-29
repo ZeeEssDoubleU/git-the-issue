@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 // import fragments
-import { REPO_FRAG } from "./gql-fragments";
+import { REPO_FRAG, ISSUE_FRAG, COMMENT_FRAG } from "./gql-fragments";
 
 // ***************
 // queries
@@ -16,7 +16,7 @@ export const GET_REPOSITORIES_OF_CURRENT_USER = gql`
 			) {
 				edges {
 					node {
-						...repositoryData
+						...repoData
 					}
 				}
 				pageInfo {
@@ -36,7 +36,7 @@ export const GET_REPOSITORIES_OF_ORGANIZATION = gql`
 			repositories(first: 5, after: $cursor) {
 				edges {
 					node {
-						...repositoryData
+						...repoData
 					}
 				}
 				pageInfo {
@@ -60,12 +60,7 @@ export const GET_ISSUES_OF_REPOSITORY = gql`
 			issues(first: 5, states: [$issueState], after: $cursor) {
 				edges {
 					node {
-						id
-						number
-						state
-						title
-						url
-						bodyHTML
+						...issueData
 					}
 				}
 				pageInfo {
@@ -75,6 +70,7 @@ export const GET_ISSUES_OF_REPOSITORY = gql`
 			}
 		}
 	}
+	${ISSUE_FRAG}
 `;
 
 export const GET_COMMENTS_OF_ISSUE = gql`
@@ -84,18 +80,22 @@ export const GET_COMMENTS_OF_ISSUE = gql`
 		$number: Int!
 		$cursor: String
 	) {
+		viewer {
+			id
+			login
+		}
 		repository(name: $repositoryName, owner: $repositoryOwner) {
+			name
+			owner {
+				login
+			}
 			issue(number: $number) {
 				id
-				comments(first: 3, after: $cursor) {
+				number
+				comments(first: 5, after: $cursor) {
 					edges {
 						node {
-							id
-							bodyHTML
-							url
-							author {
-								login
-							}
+							...commentData
 						}
 					}
 					pageInfo {
@@ -106,6 +106,7 @@ export const GET_COMMENTS_OF_ISSUE = gql`
 			}
 		}
 	}
+	${COMMENT_FRAG}
 `;
 
 // ***************
@@ -156,7 +157,11 @@ export const ADD_COMMENT = gql`
 		addComment(input: { subjectId: $issueId, body: $commentText }) {
 			commentEdge {
 				node {
-					body
+					id
+					author {
+						login
+					}
+					bodyHTML
 				}
 			}
 		}

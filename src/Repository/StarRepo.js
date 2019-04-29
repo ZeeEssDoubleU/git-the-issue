@@ -2,11 +2,11 @@ import React from "react";
 import { Mutation } from "react-apollo";
 
 // import components
-import Button from '../Button/Button';
+import Button from "../Button/Button";
 // import queries / mutations / etc
 import { STAR_REPO } from "../gql-types";
 
-const StarRepo = ({id, stargazers, viewerHasStarred}) => {
+const StarRepo = ({ id, stargazers, viewerHasStarred }) => {
 	return (
 		<Mutation
 			mutation={STAR_REPO}

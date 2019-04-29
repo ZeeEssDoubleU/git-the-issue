@@ -14,7 +14,10 @@ const WatchRepo = ({ id, watchers, viewerSubscription }) => {
 		{
 			data: {
 				updateSubscription: {
-					subscribable: { id, viewerSubscription },
+					subscribable: { 
+						id, 
+						viewerSubscription 
+					},
 				},
 			},
 		},

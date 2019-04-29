@@ -10,7 +10,7 @@ import Loading from "../Loading/Loading";
 // import queries / mutations / etc
 import { GET_COMMENTS_OF_ISSUE } from "../gql-types";
 
-const Comments = ({ repositoryName, repositoryOwner, issue }) => {
+const Comments = ({ repositoryName, repositoryOwner, issueNumber }) => {
 	return (
 		<div className="Comments">
 			<Query
@@ -18,14 +18,14 @@ const Comments = ({ repositoryName, repositoryOwner, issue }) => {
 				variables={{
 					repositoryName,
 					repositoryOwner,
-					number: issue.number,
+					number: issueNumber,
 				}}
 				notifyOnNetworkChange={true}
 			>
 				{({ data, loading, error, fetchMore }) => {
 					if (error) return <Error error={error} />;
 
-					const { repository } = data;
+					const { repository, viewer } = data;
 					// return loading indicator
 					if (loading && !repository)
 						return (
@@ -37,17 +37,15 @@ const Comments = ({ repositoryName, repositoryOwner, issue }) => {
 						);
 
 					return (
-						<>
-							<CommentList
-								loading={loading}
-								fetchMore={fetchMore}
-								number={issue.number}
-								repository={repository}
-								repositoryName={repositoryName}
-								repositoryOwner={repositoryOwner}
-							/>
-							{/* <AddComment issueId={repository.issue.id} /> */}
-						</>
+						<CommentList
+							loading={loading}
+							fetchMore={fetchMore}
+							repositoryId={repository.id}
+							repositoryName={repository.name}
+							repositoryOwner={repository.owner.login}
+							issue={repository.issue}
+							viewer={viewer}
+						/>
 					);
 				}}
 			</Query>

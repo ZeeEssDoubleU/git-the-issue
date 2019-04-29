@@ -10,18 +10,16 @@ import AddComment from "./AddComment";
 const CommentList = ({
 	loading,
 	fetchMore,
-	repository,
+	issue,
+	repositoryId,
 	repositoryName,
 	repositoryOwner,
-	number,
+	viewer,
 }) => {
 	const updateQuery = (previousResult, { fetchMoreResult }) => {
 		if (!fetchMoreResult) {
 			return previousResult;
 		}
-
-		console.log("PREVIOUS", previousResult);
-		console.log("NEXT", fetchMoreResult);
 
 		return {
 			...previousResult,
@@ -44,7 +42,7 @@ const CommentList = ({
 	};
 
 	// destructure for use below
-	const { comments } = repository.issue;
+	const { comments } = issue;
 
 	return (
 		<div className="CommentList">
@@ -64,7 +62,7 @@ const CommentList = ({
 						variables={{
 							repositoryName,
 							repositoryOwner,
-							number,
+							number: issue.number,
 							cursor: comments.pageInfo.endCursor,
 						}}
 						updateQuery={updateQuery}
@@ -74,7 +72,13 @@ const CommentList = ({
 					</FetchMore>
 				</>
 			)}
-			<AddComment issueId={repository.issue.id} />
+			<AddComment
+				issue={issue}
+				repositoryId={repositoryId}
+				repositoryName={repositoryName}
+				repositoryOwner={repositoryOwner}
+				viewer={viewer}
+			/>
 		</div>
 	);
 };
