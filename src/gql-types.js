@@ -1,7 +1,11 @@
 import gql from "graphql-tag";
 
 // import fragments
-import { REPO_FRAG, ISSUE_FRAG, COMMENT_FRAG } from "./gql-fragments";
+import {
+	REPO_FRAG,
+	ISSUE_FRAG_for_GET_ISSUES_OF_REPO,
+	ISSUE_FRAG_for_GET_COMMENTS_OF_ISSUE,
+} from "./gql-fragments";
 
 // ***************
 // queries
@@ -57,10 +61,10 @@ export const GET_ISSUES_OF_REPOSITORY = gql`
 		$cursor: String
 	) {
 		repository(name: $repositoryName, owner: $repositoryOwner) {
-			issues(first: 5, states: [$issueState], after: $cursor) {
+			issues(first: 5, states: [$issueState], before: $cursor) {
 				edges {
 					node {
-						...issueData
+						...issueData_GetIssues
 					}
 				}
 				pageInfo {
@@ -70,7 +74,7 @@ export const GET_ISSUES_OF_REPOSITORY = gql`
 			}
 		}
 	}
-	${ISSUE_FRAG}
+	${ISSUE_FRAG_for_GET_ISSUES_OF_REPO}
 `;
 
 export const GET_COMMENTS_OF_ISSUE = gql`
@@ -90,23 +94,11 @@ export const GET_COMMENTS_OF_ISSUE = gql`
 				login
 			}
 			issue(number: $number) {
-				id
-				number
-				comments(first: 5, after: $cursor) {
-					edges {
-						node {
-							...commentData
-						}
-					}
-					pageInfo {
-						endCursor
-						hasNextPage
-					}
-				}
+				...issueData_GetComments
 			}
 		}
 	}
-	${COMMENT_FRAG}
+	${ISSUE_FRAG_for_GET_COMMENTS_OF_ISSUE}
 `;
 
 // ***************

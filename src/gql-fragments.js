@@ -24,25 +24,43 @@ export const REPO_FRAG = gql`
 	}
 `;
 
-export const COMMENT_FRAG = gql`
-	fragment commentData on Comment {
-		id
-		bodyHTML
-		author {
-			login
-		}
-	}
-`;
-
-export const ISSUE_FRAG = gql`
-	fragment issueData on Issue {
+export const ISSUE_FRAG_for_GET_ISSUES_OF_REPO = gql`
+	fragment issueData_GetIssues on Issue {
 		id
 		number
 		state
 		title
 		url
 		bodyHTML
-		comments(last: 3) {
+	}
+`;
+
+export const ISSUE_FRAG_for_GET_COMMENTS_OF_ISSUE = gql`
+	fragment issueData_GetComments on Issue {
+		id
+		number
+		comments(last: 5, before: $cursor) @connection(key: "comments") {
+			edges {
+				node {
+					id
+					bodyHTML
+					author {
+						login
+					}
+				}
+			}
+			pageInfo {
+				startCursor
+				hasPreviousPage
+			}
+		}
+	}
+`;
+
+export const ISSUE_FRAG_for_ADD_COMMENT = gql`
+	fragment issueData_AddComment on Issue {
+		id
+		comments(last: 1) @connection(key: "comments") {
 			edges {
 				node {
 					id

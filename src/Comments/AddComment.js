@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { Mutation } from "react-apollo";
-import gql from "graphql-tag";
 
 // import components
 import Error from "../Error/Error";
 import Button from "../Button/Button";
 // import queries / mutations / etc
-import { ADD_COMMENT, GET_COMMENTS_OF_ISSUE } from "../gql-types";
+import { ADD_COMMENT } from "../gql-types";
 // // import fragments
-import { ISSUE_FRAG } from "../gql-fragments";
+import { ISSUE_FRAG_for_ADD_COMMENT } from "../gql-fragments";
 
 const AddComment = ({ issue, repositoryName, repositoryOwner, viewer }) => {
 	const [commentText, setCommentText] = useState("");
@@ -29,7 +28,7 @@ const AddComment = ({ issue, repositoryName, repositoryOwner, viewer }) => {
 	) => {
 		const data = client.readFragment({
 			id: `Issue:${issue.id}`,
-			fragment: ISSUE_FRAG,
+			fragment: ISSUE_FRAG_for_ADD_COMMENT,
 		});
 
 		data.comments.edges.push(commentEdge);
@@ -38,7 +37,7 @@ const AddComment = ({ issue, repositoryName, repositoryOwner, viewer }) => {
 
 		client.writeFragment({
 			id: `Issue:${issue.id}`,
-			fragment: ISSUE_FRAG,
+			fragment: ISSUE_FRAG_for_ADD_COMMENT,
 			data,
 		});
 	};
@@ -48,19 +47,7 @@ const AddComment = ({ issue, repositoryName, repositoryOwner, viewer }) => {
 			mutation={ADD_COMMENT}
 			// commentText from local state above
 			variables={{ issueId: issue.id, commentText }}
-			// update={updateComments}
-			refetchQueries={() => {
-				return [
-					{
-						query: GET_COMMENTS_OF_ISSUE,
-						variables: {
-							repositoryName,
-							repositoryOwner,
-							number: issue.number,
-						},
-					},
-				];
-			}}
+			update={updateComments}
 		>
 			{(addComment, { data, loading, error }) => (
 				<div className="AddComment">

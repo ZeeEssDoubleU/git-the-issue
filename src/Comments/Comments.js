@@ -40,11 +40,11 @@ const Comments = ({ repositoryName, repositoryOwner, issueNumber }) => {
 						<CommentList
 							loading={loading}
 							fetchMore={fetchMore}
-							repositoryId={repository.id}
-							repositoryName={repository.name}
-							repositoryOwner={repository.owner.login}
-							issue={repository.issue}
 							viewer={viewer}
+							issue={repository.issue}
+							repositoryId={repository.id}
+							repositoryName={repositoryName}
+							repositoryOwner={repositoryOwner}
 						/>
 					);
 				}}

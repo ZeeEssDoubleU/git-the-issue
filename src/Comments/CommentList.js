@@ -10,11 +10,11 @@ import AddComment from "./AddComment";
 const CommentList = ({
 	loading,
 	fetchMore,
+	viewer,
 	issue,
 	repositoryId,
 	repositoryName,
 	repositoryOwner,
-	viewer,
 }) => {
 	const updateQuery = (previousResult, { fetchMoreResult }) => {
 		if (!fetchMoreResult) {
@@ -32,8 +32,8 @@ const CommentList = ({
 						...previousResult.repository.issue.comments,
 						...fetchMoreResult.repository.issue.comments,
 						edges: [
-							...previousResult.repository.issue.comments.edges,
 							...fetchMoreResult.repository.issue.comments.edges,
+							...previousResult.repository.issue.comments.edges,
 						],
 					},
 				},
@@ -53,23 +53,23 @@ const CommentList = ({
 			) : (
 				<>
 					<header className="CommentList-header">Comments</header>
-					{comments.edges.map(({ node }) => (
-						<CommentItem key={node.id} comment={node} />
-					))}
 					<FetchMore
 						loading={loading}
-						hasNextPage={comments.pageInfo.hasNextPage}
+						hasNextPage={comments.pageInfo.hasPreviousPage}
 						variables={{
 							repositoryName,
 							repositoryOwner,
 							number: issue.number,
-							cursor: comments.pageInfo.endCursor,
+							cursor: comments.pageInfo.startCursor,
 						}}
 						updateQuery={updateQuery}
 						fetchMore={fetchMore}
 					>
-						More Comments
+						Previous Comments
 					</FetchMore>
+					{comments.edges.map(({ node }) => (
+						<CommentItem key={node.id} comment={node} />
+					))}
 				</>
 			)}
 			<AddComment
