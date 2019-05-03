@@ -153,7 +153,7 @@ export const ADD_COMMENT = gql`
 					author {
 						login
 					}
-					bodyHTML
+					body
 				}
 			}
 		}

@@ -5,7 +5,7 @@ export const REPO_FRAG = gql`
 		id
 		name
 		url
-		descriptionHTML
+		description
 		primaryLanguage {
 			name
 		}
@@ -31,7 +31,7 @@ export const ISSUE_FRAG_for_GET_ISSUES_OF_REPO = gql`
 		state
 		title
 		url
-		bodyHTML
+		body
 	}
 `;
 
@@ -43,7 +43,7 @@ export const ISSUE_FRAG_for_GET_COMMENTS_OF_ISSUE = gql`
 			edges {
 				node {
 					id
-					bodyHTML
+					body
 					author {
 						login
 					}
@@ -64,10 +64,10 @@ export const ISSUE_FRAG_for_ADD_COMMENT = gql`
 			edges {
 				node {
 					id
-					bodyHTML
 					author {
 						login
 					}
+					body
 				}
 			}
 		}

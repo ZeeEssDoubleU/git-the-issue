@@ -12,7 +12,7 @@ const RepositoryItem = ({
 	id,
 	name,
 	url,
-	descriptionHTML,
+	description,
 	primaryLanguage,
 	owner,
 	stargazers,
@@ -50,10 +50,7 @@ const RepositoryItem = ({
 			</div>
 
 			<div className="RepositoryItem-description">
-				<div
-					className="RepositoryItem-description-info"
-					dangerouslySetInnerHTML={{ __html: descriptionHTML }}
-				/>
+				<div className="RepositoryItem-description-info">{description}</div>
 				<div className="RepositoryItem-description-details">
 					<div>
 						{primaryLanguage && (

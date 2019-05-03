@@ -47,7 +47,7 @@ const IssueItem = ({ issue, repositoryOwner, repositoryName }) => {
 					<Link href={issue.url}>{issue.title}</Link>
 				</h3>
 				<span>{`(${issue.state})`}</span>
-				<div dangerouslySetInnerHTML={{ __html: issue.bodyHTML }} />
+				<p>{issue.body}</p>
 				{showComments && (
 					<Comments
 						issueNumber={issue.number}

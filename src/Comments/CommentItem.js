@@ -8,7 +8,7 @@ const CommentItem = ({ comment }) => {
 		<div className="CommentItem">
 			<div>{comment.author.login}</div>
 			<br />
-			<div dangerouslySetInnerHTML={{ __html: comment.bodyHTML }} />
+			<p>{comment.body}</p>
 		</div>
 	);
 };

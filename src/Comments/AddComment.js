@@ -9,13 +9,14 @@ import { ADD_COMMENT } from "../gql-types";
 // // import fragments
 import { ISSUE_FRAG_for_ADD_COMMENT } from "../gql-fragments";
 
-const AddComment = ({ issue, repositoryName, repositoryOwner, viewer }) => {
+const AddComment = ({ issue, viewer }) => {
 	const [commentText, setCommentText] = useState("");
 
 	const onChange = event => setCommentText(event.target.value);
 	const onSubmit = (event, addComment) => {
 		event.preventDefault();
-		addComment().then(() => setCommentText(""));
+		addComment();
+		setCommentText("");
 	};
 
 	const updateComments = (
@@ -33,8 +34,6 @@ const AddComment = ({ issue, repositoryName, repositoryOwner, viewer }) => {
 
 		data.comments.edges.push(commentEdge);
 
-		console.log("ISSUE ISSUE ISSUE", data);
-
 		client.writeFragment({
 			id: `Issue:${issue.id}`,
 			fragment: ISSUE_FRAG_for_ADD_COMMENT,
@@ -48,6 +47,23 @@ const AddComment = ({ issue, repositoryName, repositoryOwner, viewer }) => {
 			// commentText from local state above
 			variables={{ issueId: issue.id, commentText }}
 			update={updateComments}
+			optimisticResponse={{
+				addComment: {
+					__typename: "Mutation",
+					commentEdge: {
+						__typename: "IssueCommentEdge",
+						node: {
+							__typename: "IssueComment",
+							id: issue.id,
+							author: {
+								__typename: "Actor",
+								login: viewer.login,
+							},
+							body: commentText,
+						},
+					},
+				},
+			}}
 		>
 			{(addComment, { data, loading, error }) => (
 				<div className="AddComment">
