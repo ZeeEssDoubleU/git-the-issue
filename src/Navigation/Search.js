@@ -25,6 +25,7 @@ const Search = ({ orgState, orgSearch }) => {
 					type="text"
 					value={searchState}
 					onChange={onChange}
+					placeholder='Search for an organization...'
 				/>
 				<Button color="white" type="submit">
 					Search

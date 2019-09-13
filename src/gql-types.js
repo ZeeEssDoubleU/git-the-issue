@@ -13,6 +13,7 @@ import {
 export const GET_REPOSITORIES_OF_CURRENT_USER = gql`
 	query($cursor: String) {
 		viewer {
+			login
 			repositories(
 				first: 5
 				orderBy: { direction: DESC, field: STARGAZERS }

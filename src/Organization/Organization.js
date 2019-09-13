@@ -1,6 +1,9 @@
 import React from "react";
 import { Query } from "react-apollo";
 
+// import style
+import './Organization.css'
+
 // import components
 import Loading from "../Loading/Loading";
 
@@ -14,7 +17,8 @@ const Organization = ({ organizationName }) => (
 		query={GET_REPOSITORIES_OF_ORGANIZATION}
 		variables={{ organizationName }}
 		skip={organizationName === ""}
-		notifyOnNetworkStatusChange={true}>
+		notifyOnNetworkStatusChange={true}
+	>
 		{({ data, loading, error, fetchMore }) => {
 			if (error) return <Error error={error} />;
 
@@ -22,12 +26,15 @@ const Organization = ({ organizationName }) => (
 			if (loading && !organization) return <Loading />;
 
 			return (
-				<RepositoryList
-					loading={loading}
-					repositories={organization.repositories}
-					fetchMore={fetchMore}
-					entry="organization"
-				/>
+				<>
+					<h1 className="org-header">{organizationName}</h1>
+					<RepositoryList
+						loading={loading}
+						repositories={organization.repositories}
+						fetchMore={fetchMore}
+						entry="organization"
+					/>
+				</>
 			);
 		}}
 	</Query>
