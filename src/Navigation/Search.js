@@ -1,38 +1,73 @@
 import React, { useState } from "react";
-
-// import styles
-import "./Navigation.css";
+import styled from "styled-components";
 // import components
-import Input from "../Input/Input";
 import Button from "../Button/Button";
+
+// ********
+// component
+// ********
 
 const Search = ({ orgState, orgSearch }) => {
 	const [searchState, setSearchState] = useState(orgState);
 
-	const onChange = event => {
+	const onChange = (event) => {
 		setSearchState(event.target.value);
 	};
-	const onSubmit = event => {
+	const onSubmit = (event) => {
 		event.preventDefault();
 		orgSearch(searchState);
 	};
 
 	return (
-		<div className="Navigation-search">
-			<form onSubmit={onSubmit}>
+		<Container>
+			<FlexForm onSubmit={onSubmit}>
 				<Input
 					color="white"
 					type="text"
 					value={searchState}
 					onChange={onChange}
-					placeholder='Search for an organization...'
+					placeholder="Search for an organization..."
 				/>
 				<Button color="white" type="submit">
 					Search
 				</Button>
-			</form>
-		</div>
+			</FlexForm>
+		</Container>
 	);
 };
 
 export default Search;
+
+// ********
+// styles
+// ********
+
+const Container = styled.div`
+	margin: 0.75rem;
+`;
+
+const FlexForm = styled.form`
+	display: flex;
+	flex: 1;
+`;
+
+const Input = styled.input`
+	border: none;
+	padding: 10px;
+	background: none;
+	outline: none;
+	width: 200px;
+
+	border-bottom: 1px solid ${(props) => props.color};
+	color: ${(props) => props.color};
+	transition: background.4s;
+
+	&:focus {
+		background: ${(props) =>
+			props.color === "white"
+				? "rgba(255, 255, 255, 0.1)"
+				: props.color === "black"
+				? "rgba(0, 0, 0, 0.1)"
+				: "none"};
+	}
+`;
