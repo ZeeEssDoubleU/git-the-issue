@@ -79,5 +79,3 @@ export default function Issues({ repositoryName, repositoryOwner }) {
 // ********
 // styles
 // ********
-
-const IssueGrid = styled(Grid)``;

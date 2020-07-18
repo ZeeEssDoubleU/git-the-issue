@@ -73,5 +73,3 @@ export default IssueList;
 // ********
 // styles
 // ********
-
-const IssueListGrid = styled(Grid)``;

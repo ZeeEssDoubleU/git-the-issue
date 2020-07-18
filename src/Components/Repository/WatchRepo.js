@@ -1,6 +1,5 @@
 import React from "react";
 import { Mutation } from "react-apollo";
-import styled from "styled-components/macro";
 // import components
 import Button from "../Button/Button";
 // import queries / mutations / etc
