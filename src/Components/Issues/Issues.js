@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Query } from "react-apollo";
-import styled from "styled-components";
 // import components
 import Error from "../Error/Error";
 import Loading from "../Loading/Loading";

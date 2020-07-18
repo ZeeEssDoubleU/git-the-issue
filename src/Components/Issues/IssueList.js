@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 // import components
 import IssueItem from "./IssueItem";
 import FetchMore from "../FetchMore/FetchMore";
