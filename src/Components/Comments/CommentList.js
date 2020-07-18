@@ -1,11 +1,15 @@
 import React from "react";
-
+import styled from "styled-components";
 // import styles
-import "./Comments.css";
+import { Grid } from "../../styles/elements";
 // import components
 import CommentItem from "./CommentItem";
 import FetchMore from "../FetchMore/FetchMore";
 import AddComment from "./AddComment";
+
+// ********
+// component
+// ********
 
 const CommentList = ({
 	loading,
@@ -45,14 +49,14 @@ const CommentList = ({
 	const { comments } = issue;
 
 	return (
-		<div className="CommentList">
+		<CommentsContent>
 			{/* check if comments exist */}
 			{!comments.edges.length ? (
 				// return 'no comments' if no edges returned from query
-				<header className="CommentList-header">No Comments...</header>
+				<Header>No Comments...</Header>
 			) : (
 				<>
-					<header className="CommentList-header">Comments</header>
+					<Header>Comments</Header>
 					<FetchMore
 						loading={loading}
 						hasNextPage={comments.pageInfo.hasPreviousPage}
@@ -79,8 +83,20 @@ const CommentList = ({
 				repositoryOwner={repositoryOwner}
 				viewer={viewer}
 			/>
-		</div>
+		</CommentsContent>
 	);
 };
 
 export default CommentList;
+
+// ********
+// styles
+// ********
+
+const CommentsContent = styled(Grid)`
+	gap: 0.5rem;
+	padding: 0 0 0.5rem 0.5rem;
+`;
+const Header = styled.header`
+	font-style: italic;
+`;

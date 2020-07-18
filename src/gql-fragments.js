@@ -31,6 +31,9 @@ export const ISSUE_FRAG_for_GET_ISSUES_OF_REPO = gql`
 		state
 		title
 		url
+		author {
+			login
+		}
 		body
 	}
 `;

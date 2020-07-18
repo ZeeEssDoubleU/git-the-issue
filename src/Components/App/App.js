@@ -13,6 +13,10 @@ import { StoreProvider } from "../../store/useStore";
 import ResetStyles from "../../styles/reset";
 import theme from "../../styles/theme";
 
+// ********
+// component
+// ********
+
 const App = () => {
 	const [orgState, setOrgState] = useState("the-road-to-learn-react");
 
@@ -44,6 +48,10 @@ const App = () => {
 };
 
 export default App;
+
+// ********
+// styles
+// ********
 
 const AppGrid = styled(Grid)`
 	height: 100%;

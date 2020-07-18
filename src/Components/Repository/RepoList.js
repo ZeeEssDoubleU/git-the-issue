@@ -1,7 +1,7 @@
 import React, { useLayoutEffect } from "react";
 import styled from "styled-components/macro";
 // import components
-import RepositoryItem from "./RepositoryItem";
+import RepoDetails from "./RepoDetails";
 import FetchMore from "../FetchMore/FetchMore";
 import Issues from "../Issues/Issues";
 // import store / actions
@@ -51,26 +51,28 @@ const RepositoryList = ({
 	return (
 		<>
 			{repositories.edges.map(({ node }) => (
-				<Container key={node.id}>
-					<RepositoryItem {...node} />
+				<RepoItem key={node.id}>
+					<RepoDetails {...node} />
 					<Issues
 						repositoryName={node.name}
 						repositoryOwner={node.owner.login}
 					/>
-				</Container>
+				</RepoItem>
 			))}
 
-			<FetchMore
-				loading={loading}
-				hasNextPage={repositories.pageInfo.hasNextPage}
-				variables={{
-					cursor: repositories.pageInfo.endCursor,
-				}}
-				updateQuery={updateQuery(entry)}
-				fetchMore={fetchMore}
-			>
-				More Repositories
-			</FetchMore>
+			<RepoItem>
+				<FetchMore
+					loading={loading}
+					hasNextPage={repositories.pageInfo.hasNextPage}
+					variables={{
+						cursor: repositories.pageInfo.endCursor,
+					}}
+					updateQuery={updateQuery(entry)}
+					fetchMore={fetchMore}
+				>
+					More Repositories
+				</FetchMore>
+			</RepoItem>
 		</>
 	);
 };
@@ -81,7 +83,7 @@ export default RepositoryList;
 // styles
 // ********
 
-const Container = styled(Grid)`
+const RepoItem = styled(Grid)`
 	padding: ${(props) => props.theme.grid.padding};
 	border-bottom: 1px solid black;
 `;

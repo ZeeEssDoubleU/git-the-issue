@@ -1,10 +1,12 @@
 import React from "react";
-
-// import styles
-import "./FetchMore.css";
+import styled from "styled-components";
 // import components
 import Loading from "../Loading/Loading";
 import Button from "../Button/Button";
+
+// ********
+// component
+// ********
 
 const FetchMore = ({
 	loading,
@@ -14,22 +16,29 @@ const FetchMore = ({
 	fetchMore,
 	children,
 }) => (
-	<div className="FetchMore">
+	<>
 		{loading ? (
 			<Loading />
 		) : (
 			// TODO: Add prefetching to 'more repositories' and 'more comments' buttons
 			hasNextPage && (
-				<Button
+				<StyledButton
 					type="button"
-					className="FetchMore-button"
 					onClick={() => fetchMore({ variables, updateQuery })}
 				>
 					{children}
-				</Button>
+				</StyledButton>
 			)
 		)}
-	</div>
+	</>
 );
 
 export default FetchMore;
+
+// ********
+// styles
+// ********
+
+const StyledButton = styled(Button)`
+	justify-self: center;
+`;

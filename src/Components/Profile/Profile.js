@@ -2,10 +2,8 @@ import React from "react";
 import { Query } from "react-apollo";
 // import components
 import Loading from "../Loading/Loading";
-import RepositoryList from "../Repository/RepositoryList";
+import RepoList from "../Repository/RepoList";
 import Error from "../Error/Error";
-// import style
-import "./Profile.css";
 // import queries / mutations
 import { GET_REPOSITORIES_OF_CURRENT_USER } from "../../gql-types";
 
@@ -21,7 +19,7 @@ const Profile = () => (
 			if (loading && !viewer) return <Loading />;
 
 			return (
-				<RepositoryList
+				<RepoList
 					loading={loading}
 					viewer={viewer.login}
 					repositories={viewer.repositories}

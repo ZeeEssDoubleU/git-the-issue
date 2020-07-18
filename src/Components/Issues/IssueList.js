@@ -1,10 +1,14 @@
 import React from "react";
-
-// import styles
-import "./IssueList.css";
+import styled from "styled-components";
 // import components
 import IssueItem from "./IssueItem";
 import FetchMore from "../FetchMore/FetchMore";
+// import styles
+import { Grid } from "../../styles/elements";
+
+// ********
+// component
+// ********
 
 const IssueList = ({
 	issues,
@@ -36,7 +40,7 @@ const IssueList = ({
 	};
 
 	return (
-		<div className="IssueList">
+		<Grid>
 			{issues.edges.map(({ node }) => (
 				<IssueItem
 					key={node.id}
@@ -60,8 +64,14 @@ const IssueList = ({
 			>
 				More Issues
 			</FetchMore>
-		</div>
+		</Grid>
 	);
 };
 
 export default IssueList;
+
+// ********
+// styles
+// ********
+
+const IssueListGrid = styled(Grid)``;

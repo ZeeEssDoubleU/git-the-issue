@@ -1,8 +1,5 @@
 import React from "react";
 import { Query } from "react-apollo";
-
-// import styles
-import "./Comments.css";
 // import components
 import CommentList from "./CommentList";
 import Error from "../Error/Error";
@@ -10,7 +7,15 @@ import Loading from "../Loading/Loading";
 // import queries / mutations / etc
 import { GET_COMMENTS_OF_ISSUE } from "../../gql-types";
 
-const Comments = ({ repositoryName, repositoryOwner, issueNumber }) => {
+// ********
+// component
+// ********
+
+export default function Comments({
+	repositoryName,
+	repositoryOwner,
+	issueNumber,
+}) {
 	return (
 		<div className="Comments">
 			<Query
@@ -51,6 +56,8 @@ const Comments = ({ repositoryName, repositoryOwner, issueNumber }) => {
 			</Query>
 		</div>
 	);
-};
+}
 
-export default Comments;
+// ********
+// styles
+// ********

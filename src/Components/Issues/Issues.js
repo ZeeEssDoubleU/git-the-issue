@@ -1,17 +1,23 @@
 import React, { useState } from "react";
 import { Query } from "react-apollo";
-
+import styled from "styled-components";
 // import components
 import Error from "../Error/Error";
 import Loading from "../Loading/Loading";
 import IssueList from "./IssueList";
 import IssueFilter from "./IssueFilter";
+// import styles
+import { Grid } from "../../styles/elements";
 // import queries / mutations / etc
 import { GET_ISSUES_OF_REPOSITORY } from "../../gql-types";
 // import constants
 import { ISSUE_STATES } from "../../constants";
 
-const Issues = ({ repositoryName, repositoryOwner }) => {
+// ********
+// component
+// ********
+
+export default function Issues({ repositoryName, repositoryOwner }) {
 	const issueStates = [
 		ISSUE_STATES.NONE,
 		ISSUE_STATES.OPEN,
@@ -26,7 +32,7 @@ const Issues = ({ repositoryName, repositoryOwner }) => {
 	const showIssues = (issueState) => issueState !== ISSUE_STATES.NONE;
 
 	return (
-		<div className="Issues">
+		<Grid>
 			<IssueFilter
 				repositoryOwner={repositoryOwner}
 				repositoryName={repositoryName}
@@ -67,8 +73,11 @@ const Issues = ({ repositoryName, repositoryOwner }) => {
 					}}
 				</Query>
 			)}
-		</div>
+		</Grid>
 	);
-};
+}
+// ********
+// styles
+// ********
 
-export default Issues;
+const IssueGrid = styled(Grid)``;

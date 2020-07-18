@@ -1,16 +1,32 @@
 import React from "react";
-
+import styled from "styled-components";
 // import styles
-import "./Comments.css";
+import { Grid } from "../../styles/elements";
+
+// ********
+// component
+// ********
 
 const CommentItem = ({ comment }) => {
 	return (
-		<div className="CommentItem">
-			<div>{comment.author.login}</div>
-			<br />
-			<p>{comment.body}</p>
-		</div>
+		<Item>
+			<div>@{comment.author.login}</div>
+			<Pre>{comment.body}</Pre>
+		</Item>
 	);
 };
 
 export default CommentItem;
+
+// ********
+// styles
+// ********
+
+const Item = styled(Grid)`
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+	padding: 0.5rem 0 0 0.5rem;
+`;
+const Pre = styled.pre`
+	white-space: pre-wrap;
+`;

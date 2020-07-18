@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import { Mutation } from "react-apollo";
-
+import styled from "styled-components";
 // import components
 import Error from "../Error/Error";
 import Button from "../Button/Button";
+// import styls
+import { Grid } from "../../styles/elements";
 // import queries / mutations / etc
 import { ADD_COMMENT } from "../../gql-types";
-// // import fragments
+// import fragments
 import { ISSUE_FRAG_for_ADD_COMMENT } from "../../gql-fragments";
 
-const AddComment = ({ issue, viewer }) => {
+// ********
+// component
+// ********
+
+export default function AddComment({ issue, viewer }) {
 	const [commentText, setCommentText] = useState("");
 
 	const onChange = (event) => setCommentText(event.target.value);
@@ -66,22 +72,38 @@ const AddComment = ({ issue, viewer }) => {
 			}}
 		>
 			{(addComment, { data, loading, error }) => (
-				<div className="AddComment">
+				<>
 					{error && <Error error={error} />}
 
-					<form onSubmit={(event) => onSubmit(event, addComment)}>
-						<textarea
+					<Form
+						as="form"
+						onSubmit={(event) => onSubmit(event, addComment)}
+					>
+						<CommentInput
 							value={commentText}
 							onChange={onChange}
 							placeholder="Leave a comment!"
 							rows={5}
 						/>
-						<Button type="submit">Comment</Button>
-					</form>
-				</div>
+						<CommentButton type="submit">Comment</CommentButton>
+					</Form>
+				</>
 			)}
 		</Mutation>
 	);
-};
+}
 
-export default AddComment;
+// ********
+// styles
+// ********
+
+const CommentInput = styled.textarea`
+	padding: 0.5rem;
+	border: black 1px solid;
+`;
+const CommentButton = styled(Button)`
+	justify-self: center;
+`;
+const Form = styled(Grid)`
+	gap: 0.5rem;
+`;

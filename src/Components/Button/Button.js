@@ -1,19 +1,25 @@
 import React from "react";
 import styled from "styled-components/macro";
 
-const Button = ({
+// ********
+// component
+// ********
+
+export default function Button({
 	children,
 	className,
 	color = "black",
 	type = "button",
 	...props
-}) => (
-	<StyledButton type={type} color={color} className={className} {...props}>
-		{children}
-	</StyledButton>
-);
+}) {
+	return (
+		<StyledButton type={type} color={color} className={className} {...props}>
+			{children}
+		</StyledButton>
+	);
+}
 
-export const ButtonUnobtrusive = (
+export const ButtonMinimal = (
 	{ children, className, ...props },
 	type = "button",
 ) => (
@@ -21,8 +27,6 @@ export const ButtonUnobtrusive = (
 		{children}
 	</StyledButtonMinimal>
 );
-
-export default Button;
 
 // ********
 // styles
@@ -49,7 +53,7 @@ const StyledButton = styled.button`
 
 const StyledButtonMinimal = styled.button`
 	padding: 0;
-	color: #000;
+	color: black;
 	background: none;
 	border: none;
 	cursor: pointer;

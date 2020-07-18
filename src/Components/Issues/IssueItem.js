@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import { ApolloConsumer } from "react-apollo";
-
-// import styles
-import "./IssueItem.css";
+import styled from "styled-components";
 // import components
 import Link from "../Link/Link";
 import Comments from "../Comments/Comments";
 import Button from "../Button/Button";
+// import styles
+import { Grid } from "../../styles/elements";
 // import queries / mutations / etc
 import { GET_COMMENTS_OF_ISSUE } from "../../gql-types";
 
-const IssueItem = ({ issue, repositoryOwner, repositoryName }) => {
+// ********
+// component
+// ********
+
+export default function IssueItem({ issue, repositoryOwner, repositoryName }) {
 	const [showComments, setShowComments] = useState(false);
 
 	const prefetchIssues = (client) => {
@@ -28,26 +32,30 @@ const IssueItem = ({ issue, repositoryOwner, repositoryName }) => {
 	};
 
 	return (
-		<div className="IssueItem">
+		<IssueItemGrid>
 			{/* use ApolloConsumer to implicitly call client for prefetching */}
 			<ApolloConsumer>
 				{(client) => (
-					<Button
-						className="showComments-button"
+					<StyledButton
 						onClick={() => setShowComments(!showComments)}
 						onMouseOver={() => prefetchIssues(client)}
 					>
 						{showComments ? "-" : "+"}
-					</Button>
+					</StyledButton>
 				)}
 			</ApolloConsumer>
 
-			<div className="IssueItem-content">
-				<h3>
-					<Link href={issue.url}>{issue.title}</Link>
-				</h3>
-				<span>{`(${issue.state})`}</span>
-				<p>{issue.body}</p>
+			<IssueContent showComments={showComments}>
+				<IssueDetails showComments={showComments}>
+					<Header>
+						<h3>
+							<Link href={issue.url}>{issue.title}</Link>
+						</h3>
+						<span>{`(${issue.state})`}</span>
+					</Header>
+					<div>@{issue.author.login}</div>
+					<Pre>{issue.body}</Pre>
+				</IssueDetails>
 				{showComments && (
 					<Comments
 						issueNumber={issue.number}
@@ -55,9 +63,41 @@ const IssueItem = ({ issue, repositoryOwner, repositoryName }) => {
 						repositoryOwner={repositoryOwner}
 					/>
 				)}
-			</div>
-		</div>
+			</IssueContent>
+		</IssueItemGrid>
 	);
-};
+}
 
-export default IssueItem;
+// ********
+// styles
+// ********
+
+const Header = styled.div`
+	align-items: center;
+	align-content: center;
+	align-self: center;
+`;
+const IssueItemGrid = styled(Grid)`
+	grid-template-columns: auto 1fr;
+	gap: 0 0.5rem;
+`;
+const IssueContent = styled(Grid)`
+	gap: 0.5rem;
+	border-left: 1px solid black;
+	border-bottom: 1px solid black;
+`;
+const IssueDetails = styled(Grid)`
+	gap: 0.5rem;
+	padding: 0 0 0.5rem 0.5rem;
+	border-bottom: ${(props) =>
+		props.showComments === true ? "1px solid black" : "none"};
+`;
+const Pre = styled.pre`
+	white-space: pre-wrap;
+`;
+
+const StyledButton = styled(Button)`
+	height: 30px;
+	width: 30px;
+	padding: 0;
+`;

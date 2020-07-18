@@ -12,7 +12,7 @@ import { Grid, CollapsibleGrid } from "../../styles/elements";
 // component
 // ********
 
-const RepositoryItem = ({
+const RepoDetails = ({
 	id,
 	name,
 	url,
@@ -55,23 +55,23 @@ const RepositoryItem = ({
 			</CollapsibleGrid>
 
 			<DetailsGrid>
-				<RepoDetails>{description}</RepoDetails>
-				<RepoDetails>
+				<RepoMetadata>{description}</RepoMetadata>
+				<RepoMetadata>
 					{owner && (
-						<RepoDetails>
+						<RepoMetadata>
 							Owner: <a href={owner.url}>{owner.login}</a>
-						</RepoDetails>
+						</RepoMetadata>
 					)}
 					{primaryLanguage && (
-						<RepoDetails>Language: {primaryLanguage.name}</RepoDetails>
+						<RepoMetadata>Language: {primaryLanguage.name}</RepoMetadata>
 					)}
-				</RepoDetails>
+				</RepoMetadata>
 			</DetailsGrid>
 		</Grid>
 	);
 };
 
-export default RepositoryItem;
+export default RepoDetails;
 
 // ********
 // styles
@@ -85,6 +85,6 @@ const ButtonGrid = styled(Grid)`
 const DetailsGrid = styled(CollapsibleGrid)`
 	align-items: start;
 `;
-const RepoDetails = styled.div`
+const RepoMetadata = styled.div`
 	line-height: 1.5rem;
 `;

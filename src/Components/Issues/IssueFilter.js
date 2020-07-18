@@ -1,8 +1,7 @@
 import React from "react";
 import { ApolloConsumer } from "react-apollo";
-
 // import components
-import { ButtonUnobtrusive } from "../Button/Button";
+import { ButtonMinimal } from "../Button/Button";
 import { ISSUE_STATE_LABEL } from "../../constants";
 import { GET_ISSUES_OF_REPOSITORY } from "../../gql-types";
 
@@ -35,13 +34,12 @@ const IssueFilter = ({
 		// use consumer to implicitly call client for prefetching
 		<ApolloConsumer>
 			{(client) => (
-				<ButtonUnobtrusive
+				<ButtonMinimal
 					onClick={() => changeIssueState()}
-					className="IssueFilter-button"
 					onMouseOver={() => prefetchIssues(client)}
 				>
 					{ISSUE_STATE_LABEL[issueState]}
-				</ButtonUnobtrusive>
+				</ButtonMinimal>
 			)}
 		</ApolloConsumer>
 	);

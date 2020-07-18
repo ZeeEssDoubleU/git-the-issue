@@ -10,7 +10,7 @@ import Loading from "../Loading/Loading";
 // import queries / mutations / fragments
 import { GET_REPOSITORIES_OF_ORGANIZATION } from "../../gql-types";
 import Error from "../Error/Error";
-import RepositoryList from "../Repository/RepositoryList";
+import RepoList from "../Repository/RepoList";
 
 const Organization = ({ organizationName }) => (
 	<Query
@@ -26,7 +26,7 @@ const Organization = ({ organizationName }) => (
 			if (loading && !organization) return <Loading />;
 
 			return (
-				<RepositoryList
+				<RepoList
 					loading={loading}
 					repositories={organization.repositories}
 					fetchMore={fetchMore}
