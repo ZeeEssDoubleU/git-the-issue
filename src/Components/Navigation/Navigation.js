@@ -19,7 +19,7 @@ const Navigation = ({ orgState, orgSearch }) => {
 	const location = useLocation();
 
 	return (
-		<Nav>
+		<header>
 			<NavBar as="nav">
 				<Search orgState={orgState} orgSearch={orgSearch} />
 				<NavLinks>
@@ -36,7 +36,7 @@ const Navigation = ({ orgState, orgSearch }) => {
 			<Header>
 				{location.pathname === "/profile" ? state.viewer : orgState}
 			</Header>
-		</Nav>
+		</header>
 	);
 };
 
@@ -50,12 +50,6 @@ const Header = styled.h1`
 	text-align: center;
 	background: white;
 	border-bottom: 1px solid black;
-`;
-const Nav = styled.div`
-	position: fixed;
-	top: 0;
-	z-index: 1;
-	width: 100%;
 `;
 const NavBar = styled(CollapsibleGrid)`
 	padding: ${(props) => props.theme.grid.padding};

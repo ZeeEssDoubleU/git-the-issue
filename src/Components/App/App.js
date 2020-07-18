@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
+import styled from "styled-components";
 // import components
 import Navigation from "../Navigation/Navigation";
 import { Grid } from "../../styles/elements";
@@ -25,15 +26,17 @@ const App = () => {
 			<ResetStyles />
 			<BrowserRouter>
 				<StoreProvider>
-					<Grid>
+					<AppGrid>
 						<Navigation orgState={orgState} orgSearch={orgSearch} />
-						<Route exact path="/">
-							<Organization organizationName={orgState} />
-						</Route>
-						<Route exact path="/profile">
-							<Profile />
-						</Route>
-					</Grid>
+						<Main>
+							<Route exact path="/">
+								<Organization organizationName={orgState} />
+							</Route>
+							<Route exact path="/profile">
+								<Profile />
+							</Route>
+						</Main>
+					</AppGrid>
 				</StoreProvider>
 			</BrowserRouter>
 		</ThemeProvider>
@@ -41,3 +44,12 @@ const App = () => {
 };
 
 export default App;
+
+const AppGrid = styled(Grid)`
+	height: 100%;
+	width: 100%;
+	gap: 0;
+`;
+const Main = styled.main`
+	overflow: scroll;
+`;
