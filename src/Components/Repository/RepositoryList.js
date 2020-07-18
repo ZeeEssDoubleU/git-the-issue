@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import styled from "styled-components/macro";
 // import components
 import RepositoryItem from "./RepositoryItem";
 import FetchMore from "../FetchMore/FetchMore";
 import Issues from "../Issues/Issues";
+// import store / actions
+import useStore, { setViewer } from "../../store/useStore";
 // import styles
 import { Grid } from "../../styles/elements";
 
@@ -11,7 +13,19 @@ import { Grid } from "../../styles/elements";
 // component
 // ********
 
-const RepositoryList = ({ repositories, fetchMore, loading, entry }) => {
+const RepositoryList = ({
+	viewer,
+	repositories,
+	fetchMore,
+	loading,
+	entry,
+}) => {
+	const { dispatch } = useStore();
+
+	useLayoutEffect(() => {
+		setViewer(viewer, dispatch);
+	}, []);
+
 	const updateQuery = (entry) => (previousResult, { fetchMoreResult }) => {
 		if (!fetchMoreResult) {
 			return previousResult;

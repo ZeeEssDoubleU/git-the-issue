@@ -26,15 +26,12 @@ const Organization = ({ organizationName }) => (
 			if (loading && !organization) return <Loading />;
 
 			return (
-				<>
-					<h1 className="org-header">{organizationName}</h1>
-					<RepositoryList
-						loading={loading}
-						repositories={organization.repositories}
-						fetchMore={fetchMore}
-						entry="organization"
-					/>
-				</>
+				<RepositoryList
+					loading={loading}
+					repositories={organization.repositories}
+					fetchMore={fetchMore}
+					entry="organization"
+				/>
 			);
 		}}
 	</Query>

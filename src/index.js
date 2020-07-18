@@ -56,6 +56,8 @@ const client = new ApolloClient({
 	cache,
 });
 
+console.log("cache:", cache);
+
 ReactDOM.render(
 	<ApolloProvider client={client}>
 		<App />
