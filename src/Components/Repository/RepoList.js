@@ -84,6 +84,10 @@ export default RepositoryList;
 // ********
 
 const RepoItem = styled(Grid)`
-	padding: ${(props) => props.theme.grid.padding};
+	padding: 1rem 0.5rem;
 	border-bottom: 1px solid black;
+
+	@media (min-width: 720px) {
+		padding: ${(props) => props.theme.grid.padding};
+	}
 `;

@@ -80,7 +80,7 @@ export default RepoDetails;
 const ButtonGrid = styled(Grid)`
 	grid-template-columns: 1fr 1fr;
 	justify-items: stretch;
-	column-gap: ${(props) => props.theme.grid.gap};
+	column-gap: 0.5rem;
 `;
 const DetailsGrid = styled(CollapsibleGrid)`
 	align-items: start;

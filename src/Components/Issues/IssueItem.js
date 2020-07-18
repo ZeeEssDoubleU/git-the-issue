@@ -48,9 +48,9 @@ export default function IssueItem({ issue, repositoryOwner, repositoryName }) {
 			<IssueContent showComments={showComments}>
 				<IssueDetails showComments={showComments}>
 					<Header>
-						<h3>
+						<Title>
 							<Link href={issue.url}>{issue.title}</Link>
-						</h3>
+						</Title>
 						<span>{`(${issue.state})`}</span>
 					</Header>
 					<div>@{issue.author.login}</div>
@@ -79,7 +79,7 @@ const Header = styled.div`
 `;
 const IssueItemGrid = styled(Grid)`
 	grid-template-columns: auto 1fr;
-	gap: 0 0.5rem;
+	gap: 0;
 `;
 const IssueContent = styled(Grid)`
 	gap: 0.5rem;
@@ -94,10 +94,20 @@ const IssueDetails = styled(Grid)`
 `;
 const Pre = styled.pre`
 	white-space: pre-wrap;
+	min-width: 8rem;
+	font-size: 12px;
+	@media (min-width: 480px) {
+		font-size: 16px;
+	}
 `;
-
 const StyledButton = styled(Button)`
 	height: 30px;
 	width: 30px;
 	padding: 0;
+	border-right: none;
+`;
+const Title = styled.h3`
+	@media (max-width: 480px) {
+		font-size: 16px;
+	}
 `;

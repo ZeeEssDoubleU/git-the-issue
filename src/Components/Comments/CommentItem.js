@@ -29,4 +29,9 @@ const Item = styled(Grid)`
 `;
 const Pre = styled.pre`
 	white-space: pre-wrap;
+	min-width: 8rem;
+	font-size: 12px;
+	@media (min-width: 480px) {
+		font-size: 16px;
+	}
 `;

@@ -50,6 +50,9 @@ const Header = styled.h1`
 	text-align: center;
 	background: white;
 	border-bottom: 1px solid black;
+	@media (max-width: 480px) {
+		font-size: 28px;
+	}
 `;
 const NavBar = styled(CollapsibleGrid)`
 	padding: ${(props) => props.theme.grid.padding};
