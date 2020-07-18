@@ -1,10 +1,14 @@
 import React from "react";
 import { Mutation } from "react-apollo";
-
+import styled from "styled-components/macro";
 // import components
 import Button from "../Button/Button";
 // import queries / mutations / etc
-import { UNSTAR_REPO } from "../gql-types";
+import { UNSTAR_REPO } from "../../gql-types";
+
+// ********
+// component
+// ********
 
 const UnstarRepo = ({ id, stargazers, viewerHasStarred }) => {
 	return (
@@ -40,3 +44,7 @@ const UnstarRepo = ({ id, stargazers, viewerHasStarred }) => {
 };
 
 export default UnstarRepo;
+
+// ********
+// styles
+// ********

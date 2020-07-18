@@ -9,7 +9,7 @@ import Loading from "../Loading/Loading";
 import RepositoryList from "../Repository/RepositoryList";
 import Error from "../Error/Error";
 // import queries / mutations
-import { GET_REPOSITORIES_OF_CURRENT_USER } from "../gql-types";
+import { GET_REPOSITORIES_OF_CURRENT_USER } from "../../gql-types";
 
 const Profile = () => (
 	<Query

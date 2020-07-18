@@ -1,10 +1,14 @@
 import React from "react";
 import { Mutation } from "react-apollo";
-
+import styled from "styled-components/macro";
 // import components
 import Button from "../Button/Button";
 // import queries / mutations / etc
-import { STAR_REPO } from "../gql-types";
+import { STAR_REPO } from "../../gql-types";
+
+// ********
+// component
+// ********
 
 const StarRepo = ({ id, stargazers, viewerHasStarred }) => {
 	return (
@@ -27,7 +31,7 @@ const StarRepo = ({ id, stargazers, viewerHasStarred }) => {
 			}}
 		>
 			{(addStar, { data, loading, error }) => (
-				<Button className="RepositoryItem-title-action" onClick={addStar}>
+				<Button onClick={addStar}>
 					{stargazers.totalCount}
 					{" Stars (Star)"}
 				</Button>
@@ -39,3 +43,7 @@ const StarRepo = ({ id, stargazers, viewerHasStarred }) => {
 StarRepo.propTypes = {};
 
 export default StarRepo;
+
+// ********
+// styles
+// ********

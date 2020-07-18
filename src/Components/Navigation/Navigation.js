@@ -1,10 +1,12 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 // import components
 import Search from "./Search";
+// import styles
+import { Grid, CollapsibleGrid } from "../../styles/elements";
 // import constants
-import { ROUTES } from "../constants";
+import { ROUTES } from "../../constants";
 
 // ********
 // component
@@ -36,33 +38,22 @@ export default withRouter(Navigation);
 // styles
 // ********
 
-const NavBar = styled.header`
+const NavBar = styled(CollapsibleGrid)`
 	position: fixed;
 	top: 0;
 	z-index: 1;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	align-items: center;
 	width: 100%;
+	padding: ${(props) => props.theme.grid.padding};
 	background-color: #24292e;
-
-	@media only screen and (max-device-width: 720px) {
-		justify-content: space-around;
-	}
 `;
-
 const NavLink = styled(Link)`
 	font-size: 12px;
 	letter-spacing: 3.5px;
 	font-weight: 500;
 	text-transform: uppercase;
-	margin: 0.75rem;
 	text-decoration: none;
 	color: white;
 `;
-
-const NavLinks = styled.div`
-	display: flex;
-	align-items: center;
+const NavLinks = styled(Grid)`
+	grid-template-columns: auto auto auto;
 `;

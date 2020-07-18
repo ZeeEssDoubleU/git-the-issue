@@ -5,14 +5,14 @@ import { Mutation } from "react-apollo";
 import Error from "../Error/Error";
 import Button from "../Button/Button";
 // import queries / mutations / etc
-import { ADD_COMMENT } from "../gql-types";
+import { ADD_COMMENT } from "../../gql-types";
 // // import fragments
-import { ISSUE_FRAG_for_ADD_COMMENT } from "../gql-fragments";
+import { ISSUE_FRAG_for_ADD_COMMENT } from "../../gql-fragments";
 
 const AddComment = ({ issue, viewer }) => {
 	const [commentText, setCommentText] = useState("");
 
-	const onChange = event => setCommentText(event.target.value);
+	const onChange = (event) => setCommentText(event.target.value);
 	const onSubmit = (event, addComment) => {
 		event.preventDefault();
 		addComment();
@@ -69,7 +69,7 @@ const AddComment = ({ issue, viewer }) => {
 				<div className="AddComment">
 					{error && <Error error={error} />}
 
-					<form onSubmit={event => onSubmit(event, addComment)}>
+					<form onSubmit={(event) => onSubmit(event, addComment)}>
 						<textarea
 							value={commentText}
 							onChange={onChange}

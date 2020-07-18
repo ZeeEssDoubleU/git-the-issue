@@ -1,23 +1,20 @@
 import React from "react";
 import { Mutation } from "react-apollo";
-
+import styled from "styled-components/macro";
 // import components
 import Button from "../Button/Button";
 // import queries / mutations / etc
-import { WATCH_REPO } from "../gql-types";
-import { REPO_FRAG } from "../gql-fragments";
+import { WATCH_REPO } from "../../gql-types";
+import { REPO_FRAG } from "../../gql-fragments";
 
 const WatchRepo = ({ id, watchers, viewerSubscription }) => {
-   // function to update Apollo cache.  Covers gaps in GraphQL's return values.  UI updates once cache updates
+	// function to update Apollo cache.  Covers gaps in GraphQL's return values.  UI updates once cache updates
 	const updateWatchers = (
 		client,
 		{
 			data: {
 				updateSubscription: {
-					subscribable: { 
-						id, 
-						viewerSubscription 
-					},
+					subscribable: { id, viewerSubscription },
 				},
 			},
 		},
@@ -85,3 +82,7 @@ const WatchRepo = ({ id, watchers, viewerSubscription }) => {
 };
 
 export default WatchRepo;
+
+// ********
+// styles
+// ********

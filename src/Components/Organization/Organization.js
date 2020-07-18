@@ -2,13 +2,13 @@ import React from "react";
 import { Query } from "react-apollo";
 
 // import style
-import './Organization.css'
+import "./Organization.css";
 
 // import components
 import Loading from "../Loading/Loading";
 
 // import queries / mutations / fragments
-import { GET_REPOSITORIES_OF_ORGANIZATION } from "../gql-types";
+import { GET_REPOSITORIES_OF_ORGANIZATION } from "../../gql-types";
 import Error from "../Error/Error";
 import RepositoryList from "../Repository/RepositoryList";
 

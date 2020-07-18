@@ -8,7 +8,7 @@ import CommentList from "./CommentList";
 import Error from "../Error/Error";
 import Loading from "../Loading/Loading";
 // import queries / mutations / etc
-import { GET_COMMENTS_OF_ISSUE } from "../gql-types";
+import { GET_COMMENTS_OF_ISSUE } from "../../gql-types";
 
 const Comments = ({ repositoryName, repositoryOwner, issueNumber }) => {
 	return (

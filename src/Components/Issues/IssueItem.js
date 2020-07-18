@@ -8,12 +8,12 @@ import Link from "../Link/Link";
 import Comments from "../Comments/Comments";
 import Button from "../Button/Button";
 // import queries / mutations / etc
-import { GET_COMMENTS_OF_ISSUE } from "../gql-types";
+import { GET_COMMENTS_OF_ISSUE } from "../../gql-types";
 
 const IssueItem = ({ issue, repositoryOwner, repositoryName }) => {
 	const [showComments, setShowComments] = useState(false);
 
-	const prefetchIssues = client => {
+	const prefetchIssues = (client) => {
 		// prefetch the showComments-button's opposite state
 		if (!showComments) {
 			client.query({
@@ -31,7 +31,7 @@ const IssueItem = ({ issue, repositoryOwner, repositoryName }) => {
 		<div className="IssueItem">
 			{/* use ApolloConsumer to implicitly call client for prefetching */}
 			<ApolloConsumer>
-				{client => (
+				{(client) => (
 					<Button
 						className="showComments-button"
 						onClick={() => setShowComments(!showComments)}

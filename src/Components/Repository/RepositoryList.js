@@ -1,14 +1,18 @@
 import React from "react";
-
-// import styles
-import "./Repository.css";
+import styled from "styled-components/macro";
 // import components
 import RepositoryItem from "./RepositoryItem";
 import FetchMore from "../FetchMore/FetchMore";
 import Issues from "../Issues/Issues";
+// import styles
+import { Grid } from "../../styles/elements";
+
+// ********
+// component
+// ********
 
 const RepositoryList = ({ repositories, fetchMore, loading, entry }) => {
-	const updateQuery = entry => (previousResult, { fetchMoreResult }) => {
+	const updateQuery = (entry) => (previousResult, { fetchMoreResult }) => {
 		if (!fetchMoreResult) {
 			return previousResult;
 		}
@@ -33,13 +37,13 @@ const RepositoryList = ({ repositories, fetchMore, loading, entry }) => {
 	return (
 		<>
 			{repositories.edges.map(({ node }) => (
-				<div key={node.id} className="RepositoryItem">
+				<Container key={node.id}>
 					<RepositoryItem {...node} />
 					<Issues
 						repositoryName={node.name}
 						repositoryOwner={node.owner.login}
 					/>
-				</div>
+				</Container>
 			))}
 
 			<FetchMore
@@ -58,3 +62,12 @@ const RepositoryList = ({ repositories, fetchMore, loading, entry }) => {
 };
 
 export default RepositoryList;
+
+// ********
+// styles
+// ********
+
+const Container = styled(Grid)`
+	padding: ${(props) => props.theme.grid.padding};
+	border-bottom: 1px solid black;
+`;

@@ -7,9 +7,9 @@ import Loading from "../Loading/Loading";
 import IssueList from "./IssueList";
 import IssueFilter from "./IssueFilter";
 // import queries / mutations / etc
-import { GET_ISSUES_OF_REPOSITORY } from "../gql-types";
+import { GET_ISSUES_OF_REPOSITORY } from "../../gql-types";
 // import constants
-import { ISSUE_STATES } from "../constants";
+import { ISSUE_STATES } from "../../constants";
 
 const Issues = ({ repositoryName, repositoryOwner }) => {
 	const issueStates = [
@@ -23,7 +23,7 @@ const Issues = ({ repositoryName, repositoryOwner }) => {
 	const changeIssueState = () => {
 		setIssueIndex(issueIndex === issueStates.length - 1 ? 0 : issueIndex + 1);
 	};
-	const showIssues = issueState => issueState !== ISSUE_STATES.NONE;
+	const showIssues = (issueState) => issueState !== ISSUE_STATES.NONE;
 
 	return (
 		<div className="Issues">

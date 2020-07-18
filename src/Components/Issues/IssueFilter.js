@@ -3,8 +3,8 @@ import { ApolloConsumer } from "react-apollo";
 
 // import components
 import { ButtonUnobtrusive } from "../Button/Button";
-import { ISSUE_STATE_LABEL } from "../constants";
-import { GET_ISSUES_OF_REPOSITORY } from "../gql-types";
+import { ISSUE_STATE_LABEL } from "../../constants";
+import { GET_ISSUES_OF_REPOSITORY } from "../../gql-types";
 
 const IssueFilter = ({
 	repositoryOwner,
@@ -18,7 +18,7 @@ const IssueFilter = ({
 	const nextIssueState =
 		issueStates[issueIndex === issueStates.length - 1 ? 0 : issueIndex + 1];
 
-	const prefetchIssues = client => {
+	const prefetchIssues = (client) => {
 		// prefetch the issueFilter-button's NEXT issueState
 		if (showIssues(nextIssueState)) {
 			client.query({
@@ -34,7 +34,7 @@ const IssueFilter = ({
 	return (
 		// use consumer to implicitly call client for prefetching
 		<ApolloConsumer>
-			{client => (
+			{(client) => (
 				<ButtonUnobtrusive
 					onClick={() => changeIssueState()}
 					className="IssueFilter-button"

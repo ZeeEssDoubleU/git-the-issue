@@ -13,7 +13,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 // import styles
 import "./index.css";
 // import components
-import App from "./App/App";
+import App from "./Components/App/App";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
 	if (graphQLErrors) {
@@ -44,9 +44,7 @@ const retryLink = new RetryLink({
 const httpLink = new HttpLink({
 	uri: "https://api.github.com/graphql",
 	headers: {
-		authorization: `bearer ${
-			process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN
-		}`,
+		authorization: `bearer ${process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN}`,
 	},
 });
 
