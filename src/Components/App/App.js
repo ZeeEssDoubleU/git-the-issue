@@ -54,6 +54,7 @@ export default App;
 // ********
 
 const AppGrid = styled(Grid)`
+	grid-template-rows: auto 1fr;
 	height: 100%;
 	width: 100%;
 	gap: 0;
