@@ -24,7 +24,7 @@ const RepositoryList = ({
 
 	useLayoutEffect(() => {
 		setViewer(viewer, dispatch);
-	}, []);
+	}, [viewer, dispatch]);
 
 	const updateQuery = (entry) => (previousResult, { fetchMoreResult }) => {
 		if (!fetchMoreResult) {
@@ -60,7 +60,7 @@ const RepositoryList = ({
 				</RepoItem>
 			))}
 
-			<RepoItem>
+			<RepoItem className="fetch-more">
 				<FetchMore
 					loading={loading}
 					hasNextPage={repositories.pageInfo.hasNextPage}
@@ -86,6 +86,10 @@ export default RepositoryList;
 const RepoItem = styled(Grid)`
 	padding: 1rem 0.5rem;
 	border-bottom: 1px solid black;
+
+	&.fetch-more {
+		border-bottom: none;
+	}
 
 	@media (min-width: 720px) {
 		padding: ${(props) => props.theme.grid.padding};

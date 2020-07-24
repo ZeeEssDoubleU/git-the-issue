@@ -1,9 +1,6 @@
 import React from "react";
 import { Query } from "react-apollo";
 
-// import style
-import "./Organization.css";
-
 // import components
 import Loading from "../Loading/Loading";
 

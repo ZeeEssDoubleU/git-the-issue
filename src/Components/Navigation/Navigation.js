@@ -18,6 +18,12 @@ const Navigation = ({ orgState, orgSearch }) => {
 	const { state } = useStore();
 	const location = useLocation();
 
+	// ! deprecated - see below
+	// const getAccessToken = async () => {
+	// 	const response = await axios.get("/api/access-token");
+	// 	console.log("getAccessToken response:", response.data); // ? debug
+	// };
+
 	return (
 		<header>
 			<NavBar as="nav">
@@ -25,12 +31,13 @@ const Navigation = ({ orgState, orgSearch }) => {
 				<NavLinks>
 					<NavLink to={ROUTES.ORG}>Organization</NavLink>
 					<NavLink to={ROUTES.PROFILE}>Profile</NavLink>
-					<NavLink
-						as="a"
-						href="GET https://github.com/login/NavLink/authorize"
-					>
+					{/* // ! deprecated - wanted to set up GitHub API access, using Ouath, to organizations other than my own.  Unfortunately, most orgs restrict 3rd party Oauth access without confirmation.  Had to revert back to using a personal access token, which allows free browsing, but does not allow users to post on issues outside their own repos */}
+					{/* <NavLink as="a" href="/api/auth">
 						Login
 					</NavLink>
+					<NavLink as="button" onClick={getAccessToken}>
+						Access Token
+					</NavLink> */}
 				</NavLinks>
 			</NavBar>
 			<Header>

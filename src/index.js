@@ -9,11 +9,10 @@ import { HttpLink } from "apollo-link-http";
 import { onError } from "apollo-link-error";
 import { RetryLink } from "apollo-link-retry";
 import { InMemoryCache } from "apollo-cache-inmemory";
-
-// import styles
-import "./index.css";
 // import components
 import App from "./Components/App/App";
+// import styles
+import "./index.css";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
 	if (graphQLErrors) {
@@ -41,22 +40,32 @@ const retryLink = new RetryLink({
 	},
 });
 
+// ! deprecated - wanted to set up GitHub API access, using Ouath, to organizations other than my own.  Unfortunately, most orgs restrict 3rd party Oauth access without confirmation.  Had to revert back to using a personal access token, which allows free browsing, but does not allow users to post on issues outside their own repos
+// const authLink = setContext((_, { headers, ...context }) => {
+// 	const token = js_cookie.get("jwt_access");
+// 	return {
+// 		headers: {
+// 			...headers,
+// 			...(token ? { Authorization: `bearer ${token}` } : {}),
+// 		},
+// 		...context,
+// 	};
+// });
+
 const httpLink = new HttpLink({
 	uri: "https://api.github.com/graphql",
 	headers: {
-		authorization: `bearer ${process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN}`,
+		Authorization: `bearer ${process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN}`,
 	},
 });
 
-const link = ApolloLink.from([errorLink, retryLink, httpLink]);
-
+// combine links and cache into client
+const link = ApolloLink.from([errorLink, retryLink, httpLink]); // ! removed authLink, consider adding back for testing.  See above
 const cache = new InMemoryCache();
 const client = new ApolloClient({
 	link,
 	cache,
 });
-
-console.log("cache:", cache);
 
 ReactDOM.render(
 	<ApolloProvider client={client}>
