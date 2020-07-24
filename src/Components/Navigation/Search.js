@@ -42,7 +42,6 @@ export default Search;
 
 const Container = styled.form`
 	display: flex;
-	flex: 1;
 `;
 const Input = styled.input`
 	border: none;
@@ -51,6 +50,7 @@ const Input = styled.input`
 	width: 14rem;
 
 	border-bottom: 1px solid ${(props) => props.color};
+	border-radius: 0;
 	color: ${(props) => props.color};
 	transition: background.4s;
 
@@ -64,5 +64,5 @@ const Input = styled.input`
 	}
 `;
 const StyledButton = styled(Button)`
-	margin: 0;
+	margin-left: 0;
 `;
