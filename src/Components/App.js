@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import styled from "styled-components";
 // import components
-import { Helmet } from "react-helmet";
 import Navigation from "./Navigation/Navigation";
 import { Grid } from "../styles/elements";
 import Profile from "./Profile";
