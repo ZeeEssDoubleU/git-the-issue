@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Grid } from "../../styles/elements";
 // import components
 import CommentItem from "./CommentItem";
-import FetchMore from "../FetchMore/FetchMore";
+import FetchMore from "../FetchMore";
 import AddComment from "./AddComment";
 
 // ********

@@ -10,7 +10,7 @@ import { onError } from "apollo-link-error";
 import { RetryLink } from "apollo-link-retry";
 import { InMemoryCache } from "apollo-cache-inmemory";
 // import components
-import App from "./Components/App/App";
+import App from "./components/App";
 // import styles
 import "./index.css";
 

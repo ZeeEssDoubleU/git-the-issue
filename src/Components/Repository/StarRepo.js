@@ -1,7 +1,7 @@
 import React from "react";
 import { Mutation } from "react-apollo";
 // import components
-import Button from "../Button/Button";
+import Button from "../Button";
 // import queries / mutations / etc
 import { STAR_REPO } from "../../gql-types";
 

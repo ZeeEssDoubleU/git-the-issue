@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { ApolloConsumer } from "react-apollo";
 import styled from "styled-components";
 // import components
-import Link from "../Link/Link";
+import Link from "../Link";
 import Comments from "../Comments/Comments";
-import Button from "../Button/Button";
+import Button from "../Button";
 // import styles
 import { Grid } from "../../styles/elements";
 // import queries / mutations / etc

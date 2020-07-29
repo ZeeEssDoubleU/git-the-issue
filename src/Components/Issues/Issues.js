@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Query } from "react-apollo";
 // import components
-import Error from "../Error/Error";
-import Loading from "../Loading/Loading";
+import Error from "../Error";
+import Loading from "../Loading";
 import IssueList from "./IssueList";
 import IssueFilter from "./IssueFilter";
 // import styles

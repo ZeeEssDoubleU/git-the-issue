@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import styled from "styled-components";
 // import components
-import Navigation from "../Navigation/Navigation";
-import { Grid } from "../../styles/elements";
-import Profile from "../Profile/Profile";
-import Organization from "../Organization/Organization";
+import { Helmet } from "react-helmet";
+import Navigation from "./Navigation/Navigation";
+import { Grid } from "../styles/elements";
+import Profile from "./Profile";
+import Organization from "./Organization";
 // import providers
 import { ThemeProvider } from "styled-components/macro";
-import { StoreProvider } from "../../store/useStore";
+import { StoreProvider } from "../store/useStore";
 // import styles
-import ResetStyles from "../../styles/reset";
-import theme from "../../styles/theme";
+import ResetStyles from "../styles/reset";
+import theme from "../styles/theme";
 
 // ********
 // component

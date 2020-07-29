@@ -1,7 +1,7 @@
 import React from "react";
 import { ApolloConsumer } from "react-apollo";
 // import components
-import { ButtonMinimal } from "../Button/Button";
+import { ButtonMinimal } from "../Button";
 import { ISSUE_STATE_LABEL } from "../../constants";
 import { GET_ISSUES_OF_REPOSITORY } from "../../gql-types";
 

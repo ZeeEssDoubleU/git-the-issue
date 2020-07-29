@@ -1,7 +1,7 @@
 import React from "react";
 // import components
 import IssueItem from "./IssueItem";
-import FetchMore from "../FetchMore/FetchMore";
+import FetchMore from "../FetchMore";
 // import styles
 import { Grid } from "../../styles/elements";
 

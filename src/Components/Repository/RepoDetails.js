@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
 // import components
-import Link from "../Link/Link";
+import Link from "../Link";
 import StarRepo from "./StarRepo";
 import UnstarRepo from "./UnstarRepo";
 import WatchRepo from "./WatchRepo";

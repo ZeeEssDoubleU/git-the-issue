@@ -2,12 +2,12 @@ import React from "react";
 import { Query } from "react-apollo";
 
 // import components
-import Loading from "../Loading/Loading";
+import Loading from "./Loading";
 
 // import queries / mutations / fragments
-import { GET_REPOSITORIES_OF_ORGANIZATION } from "../../gql-types";
-import Error from "../Error/Error";
-import RepoList from "../Repository/RepoList";
+import { GET_REPOSITORIES_OF_ORGANIZATION } from "../gql-types";
+import Error from "./Error";
+import RepoList from "./Repository/RepoList";
 
 const Organization = ({ organizationName }) => (
 	<Query
@@ -18,6 +18,7 @@ const Organization = ({ organizationName }) => (
 	>
 		{({ data, loading, error, fetchMore }) => {
 			if (error) return <Error error={error} />;
+			if (data === undefined) return <Error error={error} />;
 
 			const { organization } = data;
 			if (loading && !organization) return <Loading />;

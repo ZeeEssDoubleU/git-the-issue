@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 // import components
-import Loading from "../Loading/Loading";
-import Button from "../Button/Button";
+import Loading from "./Loading";
+import Button from "./Button";
 
 // ********
 // component

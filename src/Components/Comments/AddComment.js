@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Mutation } from "react-apollo";
 import styled from "styled-components";
 // import components
-import Error from "../Error/Error";
-import Button from "../Button/Button";
+import Error from "../Error";
+import Button from "../Button";
 // import styls
 import { Grid } from "../../styles/elements";
 // import queries / mutations / etc

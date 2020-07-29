@@ -1,11 +1,11 @@
 import React from "react";
 import { Query } from "react-apollo";
 // import components
-import Loading from "../Loading/Loading";
-import RepoList from "../Repository/RepoList";
-import Error from "../Error/Error";
+import Loading from "./Loading";
+import RepoList from "./Repository/RepoList";
+import Error from "./Error";
 // import queries / mutations
-import { GET_REPOSITORIES_OF_CURRENT_USER } from "../../gql-types";
+import { GET_REPOSITORIES_OF_CURRENT_USER } from "../gql-types";
 
 const Profile = () => (
 	<Query

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components/macro";
 // import components
-import Button from "../Button/Button";
+import Button from "../Button";
 
 // ********
 // component
@@ -44,13 +44,12 @@ const Container = styled.form`
 	display: flex;
 `;
 const Input = styled.input`
-	border: none;
-	background: none;
-	outline: none;
 	width: 14rem;
-
+	border: none;
 	border-bottom: 1px solid ${(props) => props.color};
 	border-radius: 0;
+	outline: none;
+	background: none;
 	color: ${(props) => props.color};
 	transition: background.4s;
 

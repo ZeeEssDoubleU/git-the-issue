@@ -2,8 +2,8 @@ import React from "react";
 import { Query } from "react-apollo";
 // import components
 import CommentList from "./CommentList";
-import Error from "../Error/Error";
-import Loading from "../Loading/Loading";
+import Error from "../Error";
+import Loading from "../Loading";
 // import queries / mutations / etc
 import { GET_COMMENTS_OF_ISSUE } from "../../gql-types";
 

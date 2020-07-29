@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from "react";
 import styled from "styled-components/macro";
 // import components
 import RepoDetails from "./RepoDetails";
-import FetchMore from "../FetchMore/FetchMore";
+import FetchMore from "../FetchMore";
 import Issues from "../Issues/Issues";
 // import store / actions
 import useStore, { setViewer } from "../../store/useStore";
